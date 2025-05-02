@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Tembak Cewek - 3 Slide</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background-color: #fff0f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    #main-img {
+      margin-top: 100px;
+      cursor: pointer;
+      width: 250px;
+      transition: transform 0.3s ease;
+    }
+
+    #main-img:hover {
+      transform: scale(1.05);
+    }
+
+    #popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .slide-container {
+      background: white;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      text-align: center;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    .slide {
+      display: none;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .text {
+      margin-top: 20px;
+      font-size: 1.4em;
+      color: #e91e63;
+    }
+
+    .buttons {
+      margin-top: 15px;
+    }
+
+    .btn {
+      background-color: #e91e63;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      margin: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #c2185b;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <img id="main-img" src="200905.jpg" alt="Klik Aku!">
+
+  <div id="popup">
+    <div class="slide-container">
+      <div class="slide active">
+        <img src="debora01. jpg.jpeg" alt="Slide 1">
+        <div class="text">halo debora</div>
+      </div>
+      <div class="slide">
+        <img src="debora02. jpg.jpeg" alt="Slide 2">
+        <div class="text">aku buat ini untuk buktikan kali ini aku ingin serius denganmu</div>
+      </div>
+      <div class="slide">
+        <img src="debora03. jpg.jpeg" alt="Slide 3">
+        <div class="text"><strong>Maukah kamu jadi pacarku? 💖</strong></div>
+      </div>
+
+      <div class="buttons">
+        <button class="btn" onclick="prevSlide()">Sebelumnya</button>
+        <button class="btn" onclick="nextSlide()">Selanjutnya</button>
+        <button class="btn" onclick="closePopup()">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const mainImg = document.getElementById('main-img');
+    const popup = document.getElementById('popup');
+    const slides = document.querySelectorAll('.slide');
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    function closePopup() {
+      popup.style.display = 'none';
+      currentSlide = 0;
+      showSlide(currentSlide);
+    }
+
+    mainImg.addEventListener('click', () => {
+      popup.style.display = 'flex';
+      showSlide(currentSlide);
+    });
+  </script>
+
+</body>
+</html>
